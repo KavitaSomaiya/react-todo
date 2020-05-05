@@ -4,10 +4,15 @@ import reactDOM from 'react-dom'
 
 import App from './App'
 import './index.css'
+import ToDoList from './ToDoList'
 
 reactDOM.render (
     <App />,
     document.querySelector('#root')
+)
+reactDOM.render (
+    <ToDoList />,
+    document.querySelector('#ToDoListRoot')
 )
 
 

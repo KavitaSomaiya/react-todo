@@ -1,5 +1,11 @@
 
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
+
+import {history} from './ToDoList'
+
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import AppBar from 'material-ui/AppBar'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -9,6 +15,7 @@ import MenuItem from 'material-ui/MenuItem'
 import axios from 'axios'
 
 import UploadPage from './UploadPage'
+import ToDoList from './ToDoList'
 
 const style = {
     margin: 15
@@ -17,6 +24,7 @@ const style = {
 export default class Login extends Component {
     constructor (props) {
         super (props)
+        
         this.state = {
             userId: '',
             password: '',
@@ -49,6 +57,9 @@ export default class Login extends Component {
             </MuiThemeProvider>
         )
     }
+    static contextTypes = {
+        router: PropTypes.object,
+      }
     componentWillMount = () => {
         console.log("willmount prop values", this.props)
         console.log("in user componentWillMount")
@@ -86,6 +97,7 @@ export default class Login extends Component {
     }
 
     handleClick = event => {
+        event.preventDefault()
         const loginData = {
             userName: this.state.userId,
             password: this.state.password
@@ -104,12 +116,17 @@ export default class Login extends Component {
             var userDetail = JSON.parse( window.localStorage.getItem('userDetail'))
             fetch(`http://localhost:7000/users/${userDetail._id}`)
             .then((res) => {
+                debugger;
                 if (res.status === 200) {
                     res.json().then(res => {
                     const curData = res
                     if (curData) {
                         window.localStorage.setItem('curData', JSON.stringify(curData))
-                        window.location.href = 'index.html'
+                        // window.location.href = 'ToDoList.html'  
+                        if (curData.length !== 0) {
+                            history.push('/ToDoList')
+                        }
+                        
                     } else {
                         window.location.href = 'index.html'
                     }
@@ -136,6 +153,8 @@ export default class Login extends Component {
         )
     }
 }
+
+
 
         
         

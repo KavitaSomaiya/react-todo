@@ -8,8 +8,7 @@ export default class App extends Component {
     constructor (props) {
         super (props)
         this.state = {
-            loginPage: [],
-            uploadScreen: []
+            loginPage: []
         }
     }
     componentWillMount () {
@@ -25,7 +24,6 @@ export default class App extends Component {
         return (
             <div className="App">
                 {this.state.loginPage}
-                {this.state.uploadScreen}
             </div>
         )
     }
