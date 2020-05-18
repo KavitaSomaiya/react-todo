@@ -1,18 +1,13 @@
 
 import React, { Component } from 'react'
-import { Link, Route, Switch } from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import RaisedButton from 'material-ui/RaisedButton'
-
-import Login from './Login'
-import Register from './Register'
-import ToDoList from './ToDoList'
 
 const style = {
     margin: 15
 }
 
-export default class Loginscreen extends Component {
+export default class ToDoListScreen extends Component {
     constructor (props) {
         super (props)
         var loginButtons = []
@@ -43,7 +38,7 @@ export default class Loginscreen extends Component {
             loginmessage:loginmessage
         })
     }
-    handleClick = event => {
+    handleClick (event) {
         console.log("event")
         var loginmessage
         if (this.state.isLogin) {

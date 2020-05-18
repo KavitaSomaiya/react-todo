@@ -8,8 +8,9 @@ import TextField from 'material-ui/TextField'
 
 import './ToDoList.css'
 import ToDoItems from './ToDoItems'
-import createHistory from 'history/createBrowserHistory';
-export const history = createHistory()
+// var history = require("history").createBrowserHistory
+// import createHistory from 'history/createBrowserHistory';
+// export const history = createHistory()
 
 export default class ToDoList extends Component {
     constructor (props) {
@@ -46,9 +47,9 @@ export default class ToDoList extends Component {
           })
     }
     render () {
+        debugger
         return (
-            
-            <div className='todoListMain'>
+            <div className='todoListMain' key='todolistmain'>
                 <div className='header'>
                     <form onSubmit={this.addItem}>
                         <input  ref={(a) => this._inputElement = a} 
@@ -58,8 +59,7 @@ export default class ToDoList extends Component {
                 </div>
                 <ToDoItems  entries={this.state.items}
                             delete={this.deleteItem} />
-            </div>
-                
+            </div>   
         )
     }
 }

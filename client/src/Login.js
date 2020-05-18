@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-
+import { Redirect, withRouter } from 'react-router'
 import {history} from './ToDoList'
 
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom'
@@ -29,7 +29,12 @@ export default class Login extends Component {
             userId: '',
             password: '',
             loginComponent: localloginComponent
+            
         }
+        // this.handleClick = this.handleClick.bind(this)
+        //  contextType = {
+        //     router = PropTypes.object
+        // }
         var localloginComponent = []
         localloginComponent.push(
             <MuiThemeProvider key={"theme"}>
@@ -57,9 +62,9 @@ export default class Login extends Component {
             </MuiThemeProvider>
         )
     }
-    static contextTypes = {
-        router: PropTypes.object,
-      }
+    // static contextTypes = {
+    //     router: PropTypes.object,
+    //   }
     componentWillMount = () => {
         console.log("willmount prop values", this.props)
         console.log("in user componentWillMount")
@@ -116,17 +121,19 @@ export default class Login extends Component {
             var userDetail = JSON.parse( window.localStorage.getItem('userDetail'))
             fetch(`http://localhost:7000/users/${userDetail._id}`)
             .then((res) => {
-                debugger;
                 if (res.status === 200) {
                     res.json().then(res => {
                     const curData = res
-                    if (curData) {
-                        window.localStorage.setItem('curData', JSON.stringify(curData))
-                        // window.location.href = 'ToDoList.html'  
-                        if (curData.length !== 0) {
-                            history.push('/ToDoList')
-                        }
-                        
+                    console.log(curData)
+                    window.localStorage.setItem('curData', JSON.stringify(curData))
+                    JSON.parse( window.localStorage.getItem('curData'))
+                    console.log(curData)
+                    if (curData.length !== 0) {
+                        var ToDoListScreen = []
+                        ToDoListScreen.push(
+                            <ToDoList appContext={this.props.appContext} />
+                        )
+                        this.props.appContext.setState({loginPage:[],ToDoListScreen:ToDoListScreen})
                     } else {
                         window.location.href = 'index.html'
                     }

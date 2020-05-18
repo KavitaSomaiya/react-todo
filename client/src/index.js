@@ -10,10 +10,10 @@ reactDOM.render (
     <App />,
     document.querySelector('#root')
 )
-reactDOM.render (
-    <ToDoList />,
-    document.querySelector('#ToDoListRoot')
-)
+// reactDOM.render (
+//     <ToDoList />,
+//     document.querySelector('#ToDoListRoot')
+// )
 
 
 
